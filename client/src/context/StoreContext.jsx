@@ -14,7 +14,7 @@ const StoreContextProvider = (props) => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/product/list')
+      const res = await axios.get('https://apigadgetgarage.vercel.app/api/product/list')
       console.log(res);
       if (res.data.success) {
         setProducts(res.data.data)
