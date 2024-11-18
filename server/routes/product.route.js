@@ -1,5 +1,5 @@
 import express from 'express'
-import { addProduct, listProduct, removeProduct } from '../controllers/food.controllers.js'
+import { addProduct, listProduct, removeProduct } from '../controllers/product.controllers.js'
 import multer from 'multer'
 
 const productRouter = express.Router()
