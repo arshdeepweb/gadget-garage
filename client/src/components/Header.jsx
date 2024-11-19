@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <header
-  className="bg-cover bg-center bg-no-repeat rounded-xl my-8 mx-5 h-[60vh] flex justify-center items-center"
+  className="bg-cover bg-right md:bg-center bg-no-repeat rounded-xl my-8 mx-5 h-[60vh] flex justify-center items-center"
   style={{ backgroundImage: `url(${slides[currentIndex].image})` }}
 >
   <div className="container mx-auto px-6 flex flex-col  items-center text-center">

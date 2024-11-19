@@ -1,35 +1,62 @@
-import React, { useContext } from 'react'
-import { StoreContext } from '../context/StoreContext'
-import ProductItem from './ProductItem'
+import React, { useContext, useState } from 'react';
+import { StoreContext } from '../context/StoreContext';
+import ProductItem from './ProductItem';
 
-const MenuItem = ({category}) => {
+const MenuItem = ({ category }) => {
+  const { products } = useContext(StoreContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8;
 
-  const {products} = useContext(StoreContext)
+  // Filter products based on category
+  const filteredProducts =
+    category === 'All'
+      ? products
+      : products.filter((item) => item.category === category);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
-    <div className=''>
-    
-    {products.length==0?
-    <div className="border-gray-300 h-20 w-20 m-auto my-6 animate-spin rounded-full border-8 border-t-primary" />
-    :
-    <div className="flex justify-center items-center flex-wrap w-[100%] gap-6 p-6">
-      
-      {products.map((item, index)=>{
-        if(category === "All" || category === item.category){
- 
-          // id, colors, company, price, name, image, description, category, featured 
+    <div className="">
+      {products.length === 0 ? (
+        <div className="border-gray-300 h-20 w-20 m-auto my-6 animate-spin rounded-full border-8 border-t-primary" />
+      ) : (
+        <>
+          <div className="flex justify-center items-center flex-wrap w-[100%] gap-6 p-6">
+            {currentProducts.map((item, index) => (
+              <div key={index}>
+                <ProductItem item={item} />
+              </div>
+            ))}
+          </div>
 
-          return (
-            <div key={index}>
-              {console.log(item)}
-              <ProductItem item={item} />
-            </div>
-          )
-        }
-      })}
-    </div>}
-  </div>
-  )
-}
+          {/* Pagination Controls */}
+          <div className="flex justify-center mt-4">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-4 py-2 mx-1 ${
+                  currentPage === page
+                    ? 'bg-primary text-white'
+                    : 'bg-gray-200 text-black'
+                } rounded`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
-export default MenuItem
+export default MenuItem;

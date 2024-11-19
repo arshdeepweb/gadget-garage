@@ -26,7 +26,7 @@ const Shop = () => {
         <div className='w-[15%] hidden md:block'>
         <FilterSidebar setCategory={setCategory} />
         </div>
-        <div className='w-[85%]'>
+        <div className='w-[85%] mb-10'>
         <MenuItem category={category}/>
         </div>
       </div>

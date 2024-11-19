@@ -20,7 +20,7 @@ const ProductItem = ({ item }) => {
       <div onClick={() => { productViewHandler(id) }} className='cursor-pointer'>
         {/* Wishlist Icon */}
         <div>
-          <button className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-sm">
+          {/* <button className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-gray-500 hover:text-red-500 transition-colors"
@@ -35,13 +35,13 @@ const ProductItem = ({ item }) => {
                 d="M5 15l7-7 7 7"
               />
             </svg>
-          </button>
+          </button> */}
 
           {/* Product Image */}
           <img
             src={image}
             alt={name}
-            className="w-full h-48 object-cover rounded-lg mb-4"
+            className="w-full h-48 object-cover rounded-lg mb-4 "
           />
         </div>
       </div>
