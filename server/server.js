@@ -14,7 +14,14 @@ const port = process.env.PORT || 4000
 
 // middleware
 
-app.use(cors())
+app.use(cors({
+  origin: {
+    target:"https://gadgetgarageshop.vercel.app",
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // If your frontend is sending cookies or authentication headers
+  optionsSuccessStatus: 204 // For legacy browser support
+}));
 app.use(express.json())
 
 // database connection
