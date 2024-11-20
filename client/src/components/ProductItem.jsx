@@ -80,7 +80,7 @@ const ProductItem = ({ item }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <button className="mt-6 w-full bg-primary text-white py-3 rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center" onClick={() => { addToCart(id) }}>
+        <button className="mt-6 w-full bg-primary text-white py-3 rounded-md hover:bg-primary transition-colors flex items-center justify-center" onClick={() => { addToCart(id) }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-2"

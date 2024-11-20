@@ -3,9 +3,10 @@ import { StoreContext } from '../context/StoreContext';
 import ProductItem from './ProductItem';
 
 const MenuItem = ({ category }) => {
-  const { products } = useContext(StoreContext);
+  const { products, priceRange } = useContext(StoreContext);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
+  console.log(category);
 
   // Filter products based on category
   const filteredProducts =

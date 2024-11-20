@@ -14,8 +14,8 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Category category={category} setCategory={setCategory} />
       <ProductSlider />
+      <Category category={category} setCategory={setCategory} />
       <div>
         <h2 className='text-3xl text-center font-sans font-bold my-[2rem]'>Top Products For Our Shop</h2>
         <MenuItem category={category} />

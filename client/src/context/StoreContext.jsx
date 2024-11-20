@@ -5,7 +5,10 @@ export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
 
+  const URL = "http://localhost:3000"
+
   const [products, setProducts] = useState([])
+  const [priceRange, setPriceRange] = useState(null)
   const [category, setCategory] = useState("All")
   const [productShow, setProductShow] = useState()
   const [cartItems, setCartItems] = useState({})
@@ -63,19 +66,32 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-  useEffect(() => {
 
+  async function loadData(){
+      
     fetchProducts()
+    let loginToken = localStorage.getItem("token")
+    console.log(loginToken);
+    if(loginToken){
+      setToken(loginToken)
+      // await loadCartData(loginToken)
+    }
+  }
+  
+  
+    useEffect(() => {
+      loadData()
+    }, [])
 
-  }, [])
+  
 
 
 
   const contextValue = {
-    products, setProducts, fetchProducts,
+    products, setProducts, fetchProducts, URL,
     cartItems, setCartItems, payment, setPayment,
     token, setToken, addToCart, removeToCart, getTotalCartAmount,
-    productShow, setProductShow, category, setCategory
+    productShow, setProductShow, category, setCategory, priceRange, setPriceRange
   }
 
   return (

@@ -27,7 +27,7 @@ const categories = [
       category_image: category_2
   },
   {
-      category_name: "phone",
+      category_name: "mobile",
       category_image: category_3
   },
   {

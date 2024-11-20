@@ -8,6 +8,7 @@ const Shop = () => {
 
   const {category, setCategory} = useContext(StoreContext)
   const location = useLocation();
+  // const [] = useState()
 
   // Parse the query parameters
   const queryParams = new URLSearchParams(location.search);
@@ -22,13 +23,17 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen ">
-      <div className="flex bg-gray-100">
-        <div className='w-[15%] hidden md:block'>
+      <div className="flex bg-gray-100 mb-10">
+        {/* <div className='w-[15%] hidden md:block'>
         <FilterSidebar setCategory={setCategory} />
-        </div>
-        <div className='w-[85%] mb-10'>
+        </div> */}
+        {/* <div className='w-[85%] mb-10'>
         <MenuItem category={category}/>
-        </div>
+        </div> */}
+
+
+
+        <MenuItem category={category}/>
       </div>
     </div>
   )

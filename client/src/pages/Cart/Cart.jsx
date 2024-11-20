@@ -92,7 +92,7 @@ function Cart() {
                 )}
               </div>
             </div>
-            <button className="p-2 my-2 cursor-pointer border-2 border-solid border-blue-700 bg-blue-700 text-white w-[100%] text-lg rounded-md" onClick={() => navigate("/placeorder")}>
+            <button className="p-2 my-2 cursor-pointer border-2 border-solid border-primary bg-primary text-white w-[100%] text-lg rounded-md" onClick={() => navigate("/placeorder")}>
               Proceed to Checkout
             </button>
           </div>

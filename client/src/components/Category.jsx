@@ -12,7 +12,7 @@ const Category = ({category, setCategory}) => {
         {categories.map((item, index)=>{
           return (
             <div onClick={()=>setCategory(prev => prev === item.category_name ? "All" : item.category_name)} key={index} className='flex flex-col gap-2 items-center '>
-              <img src={item.category_image} className={`w-[15vw] md:w-[12vw] min-w-[100px] ${category === item.category_name ? "border-4 border-solid border-primary rounded-[50%]" : "rounded-[50%]"} `} alt="" />
+              <img src={item.category_image} className={`w-[15vw] md:w-[12vw] min-w-[100px] ${category === item.category_name ? "border-4 border-solid border-primary rounded-[150%]" : "rounded-[150%]"} `} alt="" />
               <p className='text-lg '>{item.category_name}</p>
             </div>
         )
