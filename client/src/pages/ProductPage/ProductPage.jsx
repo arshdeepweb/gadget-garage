@@ -53,7 +53,7 @@ const ProductPage = () => {
                 </p>
 
                 <div className="text-xl font-semibold text-green-600 mb-4">
-                  {item.price}
+                  Rs {item.price}
                 </div>
 
                 <div className="mb-4">

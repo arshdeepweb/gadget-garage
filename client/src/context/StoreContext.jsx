@@ -33,18 +33,39 @@ const StoreContextProvider = (props) => {
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
     }
-    // if (token) {
-    //   await axios.post(URL + "/api/cart/add", { itemId }, { headers: { token } })
-    //   console.log("success")
-    // }
+    if (token) {
+      await axios.post(URL + "/api/cart/add", { itemId }, { headers: { token } })
+      console.log("success")
+    }
   }
   const removeToCart = async (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
-    // if (token) {
-    //   await axios.post(URL + "/api/cart/remove", { itemId }, { headers: { token } })
-    //   console.log("success")
-    // }
+    if (token) {
+      await axios.post(URL + "/api/cart/remove", { itemId }, { headers: { token } })
+      console.log("success")
+    }
   }
+
+  const loadCartData = async (token) => {
+    const response = await axios.post(URL + "/api/cart/get", {}, { headers: { token } })
+    setCartItems(response.data.message)
+  }
+
+  const paymentRazorpay = async (planId) => {
+    console.log("RUN");
+    try {
+      const token = await getToken();
+      const response = await axios.post(`${backendURL}/api/user/pay-razor`, { planId }, { headers: { token } });
+
+      if (response.data.success) {
+        initPay(response.data.order);
+      } else {
+        console.error("Payment initiation failed:", response.data.message);
+      }
+    } catch (error) {
+      console.log("Error in paymentRazorpay:", error);
+    }
+  };
 
   const getTotalCartAmount = () => {
     console.log(cartItems);
@@ -67,24 +88,21 @@ const StoreContextProvider = (props) => {
   };
 
 
-  async function loadData(){
-      
+  async function loadData() {
+
     fetchProducts()
     let loginToken = localStorage.getItem("token")
     console.log(loginToken);
-    if(loginToken){
+    if (loginToken) {
       setToken(loginToken)
-      // await loadCartData(loginToken)
+      await loadCartData(loginToken)
     }
   }
-  
-  
-    useEffect(() => {
-      loadData()
-    }, [])
 
-  
 
+  useEffect(() => {
+    loadData()
+  }, [])
 
 
   const contextValue = {

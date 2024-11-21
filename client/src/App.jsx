@@ -8,6 +8,7 @@ import Login from './pages/Login/Login'
 import Cart from './pages/Cart/Cart'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import ProductPage from './pages/ProductPage/ProductPage'
+import MyOrder from './pages/MyOrder/MyOrder'
 
 
 
@@ -51,6 +52,10 @@ const App = () => {
           path: "product/:id",
           element: <ProductPage />,
         },
+        {
+          path: "myorders",
+          element: <MyOrder />,
+        }
       ]
     }
   ])

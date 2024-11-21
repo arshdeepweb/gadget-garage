@@ -41,10 +41,10 @@ function Cart() {
                         alt={item.name}
                       />
                       <p>{item.name}</p>
-                      <p>${item.price}</p>
+                      <p>Rs {item.price}</p>
                       <p className="">{cartItems[item.id]}</p>
                       <p className="">
-                        ${item.price * cartItems[item.id]}
+                        Rs {item.price * cartItems[item.id]}
                       </p>
                       <p
                         onClick={() => {
@@ -70,25 +70,25 @@ function Cart() {
               <div className="flex justify-between">
                 <p className="text-lg">SubTotal</p>
                 {itemPrice > 0 ? (
-                  <p>${itemPrice}</p>
+                  <p>Rs {itemPrice}</p>
                 ) : (
-                  <span>$0</span>
+                  <span>Rs 0</span>
                 )}
               </div>
               <div className="flex justify-between">
                 <p className="text-lg">Delivery</p>
                 {itemPrice > 0 ? (
-                  <p>${5}</p>
+                  <p>Rs {5}</p>
                 ) : (
-                  <span>$0</span>
+                  <span>Rs 0</span>
                 )}
               </div>
               <div className="flex justify-between">
                 <b className="text-lg">Total Amount</b>
                 {itemPrice > 0 ? (
-                  <b>${itemPrice + 5}</b>
+                  <b>Rs {itemPrice + 5}</b>
                 ) : (
-                  <span>$0</span>
+                  <span>Rs 0</span>
                 )}
               </div>
             </div>
