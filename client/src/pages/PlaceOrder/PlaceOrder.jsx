@@ -116,7 +116,7 @@ const PlaceOrder = () => {
             required
             value={data.firstName}
             onChange={handleChange}
-            className="input-field"
+            className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
           />
           <input
             type="text"
@@ -125,7 +125,7 @@ const PlaceOrder = () => {
             required
             value={data.lastName}
             onChange={handleChange}
-            className="input-field"
+            className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
           />
         </div>
         <input
@@ -135,7 +135,7 @@ const PlaceOrder = () => {
           required
           value={data.email}
           onChange={handleChange}
-          className="input-field"
+          className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
         />
         <input
           type="text"
@@ -144,7 +144,7 @@ const PlaceOrder = () => {
           required
           value={data.street}
           onChange={handleChange}
-          className="input-field"
+          className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
@@ -154,7 +154,7 @@ const PlaceOrder = () => {
             required
             value={data.city}
             onChange={handleChange}
-            className="input-field"
+            className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
           />
           <input
             type="text"
@@ -163,7 +163,7 @@ const PlaceOrder = () => {
             required
             value={data.state}
             onChange={handleChange}
-            className="input-field"
+            className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -174,7 +174,7 @@ const PlaceOrder = () => {
             required
             value={data.zipCode}
             onChange={handleChange}
-            className="input-field"
+            className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
           />
           <input
             type="text"
@@ -183,7 +183,7 @@ const PlaceOrder = () => {
             required
             value={data.country}
             onChange={handleChange}
-            className="input-field"
+            className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
           />
         </div>
         <input
@@ -193,7 +193,7 @@ const PlaceOrder = () => {
           required
           value={data.phoneNumber}
           onChange={handleChange}
-          className="input-field"
+          className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
         />
       </form>
 
