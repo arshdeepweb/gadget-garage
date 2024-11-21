@@ -217,7 +217,7 @@ const PlaceOrder = () => {
         <button
           type="submit"
           onClick={handlePlaceOrder}
-          className="btn-primary w-full mt-4"
+          className="p-2 my-2 cursor-pointer border-2 border-solid border-primary bg-primary text-white w-[100%] text-lg rounded-md"
         >
           Proceed to Payment
         </button>
