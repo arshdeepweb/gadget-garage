@@ -5,7 +5,7 @@ export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
 
-  const URL = "http://localhost:3000"
+  const URL = "https://gadget-garage.vercel.app"
 
   const [products, setProducts] = useState([])
   const [priceRange, setPriceRange] = useState(null)
@@ -17,7 +17,7 @@ const StoreContextProvider = (props) => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('https://apigadgetgarage.vercel.app/api/product/list')
+      const res = await axios.get(`${URL}/api/product/list`)
       console.log(res);
       if (res.data.success) {
         setProducts(res.data.data)
