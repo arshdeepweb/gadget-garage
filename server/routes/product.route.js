@@ -4,8 +4,6 @@ import { addProduct, listProduct, removeProduct } from '../controllers/product.c
 
 const productRouter = express.Router()
 
-// image storage engine 
-
 
 productRouter.post("/add", addProduct)
 productRouter.get("/list", listProduct)
