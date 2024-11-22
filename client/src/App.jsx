@@ -9,8 +9,7 @@ import Cart from './pages/Cart/Cart'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import ProductPage from './pages/ProductPage/ProductPage'
 import MyOrder from './pages/MyOrder/MyOrder'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -65,7 +64,6 @@ const App = () => {
   return (
     <StoreContextProvider>
       <RouterProvider router={router}>
-        <ToastContainer />
         <Layout />
       </RouterProvider>
     </StoreContextProvider>
