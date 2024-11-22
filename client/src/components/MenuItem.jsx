@@ -30,7 +30,7 @@ const MenuItem = ({ category }) => {
         <div className="border-gray-300 h-20 w-20 m-auto my-6 animate-spin rounded-full border-8 border-t-primary" />
       ) : (
         <>
-          <div className="flex justify-center items-center flex-wrap w-[100%] gap-6 p-6">
+          <div className="grid grid-cols-2 sm:flex justify-center items-center sm:flex-wrap w-[100%] gap-6 p-6">
             {currentProducts.map((item, index) => (
               <div key={index}>
                 <ProductItem item={item} />

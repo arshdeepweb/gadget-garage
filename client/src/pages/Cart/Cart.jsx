@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import { assets } from "../../assets/assets";
 import axios from "axios";
@@ -6,13 +6,20 @@ import { useNavigate } from "react-router-dom";
 import '../../index.css'
 
 function Cart() {
-  const { cartItems, removeToCart, products, getTotalCartAmount, } = useContext(StoreContext);
+  const { cartItems, removeToCart, products, getTotalCartAmount, coupon, setCoupon, getTotalDiscountAmount } = useContext(StoreContext);
   const navigate = useNavigate()
+  const [couponDiscount, setCouponDiscount] = useState()
 
   let itemPrice = getTotalCartAmount()
+  let discountTotal = getTotalDiscountAmount()
 
   console.log(itemPrice);
   // flex justify-between items-center cursor-pointer gap-6 overflow-x-scroll no-scrollbar
+
+  const onClickHandler = () => {
+    setCoupon(couponDiscount.toLowerCase())
+    getTotalCartAmount()
+  }
 
 
   return (
@@ -78,15 +85,25 @@ function Cart() {
               <div className="flex justify-between">
                 <p className="text-lg">Delivery</p>
                 {itemPrice > 0 ? (
-                  <p>Rs {5}</p>
+                  <p>Rs {500}</p>
                 ) : (
                   <span>Rs 0</span>
                 )}
               </div>
+              {coupon ? <div className="flex justify-between">
+                <b className="text-lg">Discount</b>
+                {coupon ? (
+                  <b>{coupon === "gadget20" 
+                    ? `${coupon} ` 
+                    : coupon === "newyear30" 
+                    ? `${coupon} ` 
+                    : ""} </b>
+                ) : ""}
+              </div> : <></>}
               <div className="flex justify-between">
                 <b className="text-lg">Total Amount</b>
-                {itemPrice > 0 ? (
-                  <b>Rs {itemPrice + 5}</b>
+                {discountTotal > 0 ? (
+                  <b>Rs {discountTotal + 500}</b>
                 ) : (
                   <span>Rs 0</span>
                 )}
@@ -98,13 +115,14 @@ function Cart() {
           </div>
           <div className="flex flex-col gap-4 ">
             <p>If you have a promo code, Enter it</p>
-            <div className="bg-gray-500 w-[20rem]">
+            <div className="bg-gray-500 flex w-[20rem]">
               <input
                 type="text"
                 placeholder="Enter Promo Code"
                 className="pl-[10px] bg-transparent border-none outline-none text-lg"
+                onChange={(e) => setCouponDiscount(e.target.value)}
               />
-              <button className="px-6 py-4 bg-black cursor-pointer text-white text-lg ">
+              <button className="px-6 py-4 bg-black cursor-pointer text-white text-lg " onClick={onClickHandler}>
                 Submit
               </button>
             </div>

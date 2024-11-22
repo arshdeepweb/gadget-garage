@@ -4,8 +4,8 @@ import { listOrders, orderStatus, paymentRazorpay, placeOrder, userOrder, verify
 
 const orderRouter = express.Router();
 
-orderRouter.post("/place",authMiddleware,placeOrder)
-orderRouter.post("/verify-razor", verifyRazorpay)
+orderRouter.post("/place",placeOrder)
+orderRouter.post("/verify-razor",authMiddleware, verifyRazorpay)
 orderRouter.post("/userorder",authMiddleware,userOrder)
 orderRouter.get("/listorder",listOrders)
 orderRouter.post("/updateStatus",orderStatus)

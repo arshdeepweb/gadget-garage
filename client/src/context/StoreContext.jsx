@@ -8,6 +8,7 @@ const StoreContextProvider = (props) => {
   const URL = "https://gadget-garage.vercel.app"
 
   const [products, setProducts] = useState([])
+  const [coupon, setCoupon] = useState("")
   const [priceRange, setPriceRange] = useState(null)
   const [category, setCategory] = useState("All")
   const [productShow, setProductShow] = useState()
@@ -71,21 +72,59 @@ const StoreContextProvider = (props) => {
     console.log(cartItems);
     let totalAmount = 0;
 
+    // Calculate the total amount without discount
     for (const item in cartItems) {
       if (cartItems.hasOwnProperty(item) && cartItems[item] > 0) {
+        // Find the product information
+        let itemInfo = products.find(product => product.id == item); // Use '==' for loose equality
 
-        // Ensure item is treated as the same type as product._id
-        let itemInfo = products.find(product => product.id == item);  // Use '==' for loose equality to compare different types
-
-        if (itemInfo && typeof (itemInfo.price) !== 'undefined') {
+        if (itemInfo && typeof itemInfo.price !== 'undefined') {
           totalAmount += itemInfo.price * cartItems[item];
         } else {
-          console.warn(`Item with _id ${item} not found in Products or has no price`, itemInfo);
+          console.warn(`Item with id ${item} not found in Products or has no price`, itemInfo);
         }
       }
     }
-    return totalAmount;
+
+  
+    return totalAmount ;
   };
+
+
+  const getTotalDiscountAmount = () => {
+    console.log(cartItems);
+    let totalAmount = 0;
+
+    // Calculate the total amount without discount
+    for (const item in cartItems) {
+      if (cartItems.hasOwnProperty(item) && cartItems[item] > 0) {
+        // Find the product information
+        let itemInfo = products.find(product => product.id == item); // Use '==' for loose equality
+
+        if (itemInfo && typeof itemInfo.price !== 'undefined') {
+          totalAmount += itemInfo.price * cartItems[item];
+        } else {
+          console.warn(`Item with id ${item} not found in Products or has no price`, itemInfo);
+        }
+      }
+    }
+
+    // Apply coupon discount if available
+    let discountPercentage = 0;
+
+    if (coupon === "gadget20") {
+      discountPercentage = 20;
+    } else if (coupon === "newyear30") {
+      discountPercentage = 30;
+    }
+
+    // Calculate discount
+    const discountAmount = (totalAmount * discountPercentage) / 100;
+
+    // Return the discounted total amount
+    return totalAmount - discountAmount;
+  };
+
 
 
   async function loadData() {
@@ -109,7 +148,8 @@ const StoreContextProvider = (props) => {
     products, setProducts, fetchProducts, URL,
     cartItems, setCartItems, payment, setPayment,
     token, setToken, addToCart, removeToCart, getTotalCartAmount,
-    productShow, setProductShow, category, setCategory, priceRange, setPriceRange
+    productShow, setProductShow, category, setCategory, priceRange, setPriceRange,
+    coupon, setCoupon, getTotalDiscountAmount
   }
 
   return (

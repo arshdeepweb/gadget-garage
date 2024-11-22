@@ -1,47 +1,48 @@
-import header1 from './1.png'
-import header2 from './2.png'
-import header3 from './3.png'
-import category_1 from './laptop.jpg'
-import category_2 from './computer.jpg'
-import category_3 from './phone.jpg'
-import category_4 from './watch.jpg'
-import category_5 from './accessories.jpg'
-import category_6 from './earphone.jpg'
-import iphone from './ph.jpg'
+// Import images
+import header1 from './1.png';
+import header2 from './2.png';
+import header3 from './3.png';
+import iphone from './ph.jpg';
 
+// Import React icons
+import { FaMobile } from "react-icons/fa";
+import { RiComputerFill } from "react-icons/ri";
+import { BsFillLaptopFill, BsSmartwatch, BsEarbuds } from "react-icons/bs";
+import { TfiLayoutGrid4Alt } from "react-icons/tfi";
 
+// Export assets for headers
 export const assets = {
-  header1,
-  header2,
-  header3,
-  iphone
-}
+  headers: [header1, header2, header3],
+  iphone,
+};
 
-const categories = [
+// Define categories
+export const categories = [
   {
-      category_name: "laptop",
-      category_image: category_1
+    name: "Laptop",
+    icon: BsFillLaptopFill, // Pass the component, not JSX
   },
   {
-      category_name: "computer",
-      category_image: category_2
+    name: "Computer",
+    icon: RiComputerFill,
   },
   {
-      category_name: "mobile",
-      category_image: category_3
+    name: "Mobile",
+    icon: FaMobile,
   },
   {
-      category_name: "watch",
-      category_image: category_4
+    name: "Watch",
+    icon: BsSmartwatch,
   },
   {
-      category_name: "accessories",
-      category_image: category_5
+    name: "Accessories",
+    icon: TfiLayoutGrid4Alt,
   },
   {
-      category_name: "earphone",
-      category_image: category_6
+    name: "Earphone",
+    icon: BsEarbuds,
   },
-]
+];
 
-  export {categories}
+// Default export
+export default { assets, categories };

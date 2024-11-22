@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const DELIVERY_CHARGE = 5; // Define reusable constants
+const DELIVERY_CHARGE = 500; // Define reusable constants
 
 const PlaceOrder = () => {
   const { 
@@ -12,14 +13,21 @@ const PlaceOrder = () => {
     URL, 
     cartItems, 
     token, 
+    setToken,
     payment, 
     setPayment, 
-    setCartItems 
+    setCartItems,
+    coupon,
+    setCoupon,
+    getTotalDiscountAmount
+     
   } = useContext(StoreContext);
 
+  let discountTotal = getTotalDiscountAmount()
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
+    password:"",
     street: "",
     state: "",
     city: "",
@@ -38,7 +46,7 @@ const PlaceOrder = () => {
   };
 
   // Prepare Razorpay options
-  const createRazorpayOptions = (order) => ({
+  const createRazorpayOptions = (order, token) => ({
     key: import.meta.env.VITE_RAZORPAY_KEY_ID,
     amount: order.amount,
     currency: order.currency,
@@ -77,14 +85,17 @@ const PlaceOrder = () => {
       const orderData = {
         address: data,
         items: orderItems,
-        amount: getTotalCartAmount() + DELIVERY_CHARGE,
+        amount: discountTotal + DELIVERY_CHARGE,
         payment,
       };
 
-      const response = await axios.post(`${URL}/api/order/place`, orderData, { headers: { token } });
+      const response = await axios.post(`${URL}/api/order/place`, orderData, );
       console.log(response);
       if (response.data.success) {
-        processPayment(response.data.order);
+        localStorage.setItem('token',response.data.message)
+        setToken(response.data.message)
+        processPayment(response.data.order, response.data.message);
+        navigate('/myorders')
       } else {
         console.error("Order creation failed:", response.data.message);
       }
@@ -95,8 +106,10 @@ const PlaceOrder = () => {
 
   // Redirect if no token or cart is empty
   useEffect(() => {
-    if (!token || getTotalCartAmount() <= 0) {
-      navigate("/cart");
+    if (getTotalCartAmount() <= 0) {
+      toast.info('purchase a product')
+        navigate('/shop')
+      
     }
   }, [token, getTotalCartAmount, navigate]);
 
@@ -128,6 +141,15 @@ const PlaceOrder = () => {
             className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
           />
         </div>
+        <input
+            type="text"
+            name="password"
+            placeholder="Password"
+            required
+            value={data.password}
+            onChange={handleChange}
+            className="p-4 w-[100%] text-lg rounded-md bg-transparent border-2 border-solid border-slate-600"
+          />
         <input
           type="email"
           name="email"
@@ -198,7 +220,7 @@ const PlaceOrder = () => {
       </form>
 
       {/* Cart Totals and Payment */}
-      <div className="cart-totals flex-1 flex flex-col px-6">
+      <div className="cart-totals mt-5 md:mt-1 flex-1 flex flex-col px-6">
         <h2 className="text-2xl font-bold">Cart Totals</h2>
         <div className="totals-summary my-4">
           <div className="flex justify-between">
@@ -209,9 +231,19 @@ const PlaceOrder = () => {
             <p>Delivery</p>
             <p>Rs {DELIVERY_CHARGE}</p>
           </div>
+          {coupon ? <div className="flex justify-between">
+                <b className="text-lg">Discount</b>
+                {coupon ? (
+                  <b>{coupon === "gadget20" 
+                    ? `${coupon} ` 
+                    : coupon === "newyear30" 
+                    ? `${coupon} ` 
+                    : ""} </b>
+                ) : ""}
+              </div> : <></>}
           <div className="flex justify-between">
             <b>Total</b>
-            <b>Rs {getTotalCartAmount() + DELIVERY_CHARGE}</b>
+            <b>Rs {discountTotal + DELIVERY_CHARGE}</b>
           </div>
         </div>
         <button
